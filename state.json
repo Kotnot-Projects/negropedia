@@ -1,0 +1,9 @@
+{
+  "articles": [
+    {
+      "id": "battle_nemensk",
+      "title": "Битва за Неменск",
+      "file": "nemensk.json"
+    }
+  ]
+}

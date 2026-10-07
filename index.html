@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Негропедия - Свободная энциклопедия</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f6f6f6;
+            color: #202122;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #fff;
+            border-bottom: 1px solid #a7d7f9;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #202122;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+        }
+
+        .logo h1 {
+            font-size: 1.5em;
+            font-weight: normal;
+            font-family: 'Linux Libertine', Georgia, Times, serif;
+        }
+
+        .logo h1 span {
+            font-weight: bold;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            margin-left: auto;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            font-size: 14px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #3366cc;
+            box-shadow: 0 0 0 1px #3366cc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .sidebar {
+            background: #fff;
+            border: 1px solid #a7d7f9;
+            border-radius: 4px;
+            padding: 15px;
+            position: sticky;
+            top: 80px;
+        }
+
+        .sidebar h3 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #54595d;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eaecf0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar ul li a {
+            color: #3366cc;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+            display: block;
+            padding: 6px 8px;
+            border-radius: 3px;
+            transition: background 0.15s;
+            word-wrap: break-word;
+        }
+
+        .sidebar ul li a:hover {
+            background: #eaf3ff;
+            text-decoration: underline;
+        }
+
+        .sidebar ul li a.active {
+            background: #eaf3ff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .main-content {
+            background: #fff;
+            border: 1px solid #a7d7f9;
+            border-radius: 4px;
+            padding: 30px 40px;
+            min-height: 500px;
+        }
+
+        .article-title {
+            font-family: 'Linux Libertine', Georgia, Times, serif;
+            font-size: 2em;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .article-content {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .article-content h1 {
+            font-family: 'Linux Libertine', Georgia, Times, serif;
+            font-size: 1.8em;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 8px;
+            margin: 25px 0 15px;
+        }
+
+        .article-content h2 {
+            font-family: 'Linux Libertine', Georgia, Times, serif;
+            font-size: 1.5em;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 6px;
+            margin: 20px 0 12px;
+        }
+
+        .article-content h3 {
+            font-size: 1.2em;
+            margin: 18px 0 10px;
+        }
+
+        .article-content h4 {
+            font-size: 1.05em;
+            margin: 15px 0 8px;
+        }
+
+        .article-content h5,
+        .article-content h6 {
+            font-size: 1em;
+            margin: 12px 0 6px;
+        }
+
+        .article-content p {
+            margin-bottom: 12px;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 10px 0 15px 30px;
+        }
+
+        .article-content li {
+            margin-bottom: 5px;
+        }
+
+        .article-content a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+
+        .article-content code {
+            background: #f8f9fa;
+            border: 1px solid #eaecf0;
+            border-radius: 2px;
+            padding: 1px 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        .article-content pre {
+            background: #f8f9fa;
+            border: 1px solid #eaecf0;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .article-content pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 0.9em;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid #eaecf0;
+            padding-left: 15px;
+            margin: 15px 0;
+            color: #54595d;
+            font-style: italic;
+        }
+
+        .article-content figure {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .article-content figcaption {
+            font-size: 0.85em;
+            color: #54595d;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .article-content table {
+            border-collapse: collapse;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .article-content th,
+        .article-content td {
+            border: 1px solid #a2a9b1;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .article-content th {
+            background: #eaecf0;
+            font-weight: bold;
+        }
+
+        .article-content hr {
+            border: none;
+            border-top: 1px solid #a2a9b1;
+            margin: 20px 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #54595d;
+            font-size: 16px;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #d33;
+            font-size: 16px;
+        }
+
+        .error small {
+            display: block;
+            margin-top: 10px;
+            color: #54595d;
+            font-size: 13px;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome h2 {
+            font-family: 'Linux Libertine', Georgia, Times, serif;
+            font-size: 2.2em;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .welcome p {
+            color: #54595d;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .welcome .stats {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .welcome .stat {
+            text-align: center;
+        }
+
+        .welcome .stat .number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3366cc;
+        }
+
+        .welcome .stat .label {
+            color: #54595d;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #54595d;
+            font-size: 13px;
+            border-top: 1px solid #eaecf0;
+            margin-top: 30px;
+        }
+
+        footer a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .sidebar {
+                position: static;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .article-title {
+                font-size: 1.5em;
+            }
+            .header-content {
+                flex-wrap: wrap;
+            }
+            .logo h1 {
+                font-size: 1.2em;
+            }
+            .search-box {
+                max-width: 100%;
+                margin-left: 0;
+                order: 3;
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo" onclick="loadHome()">
+                <img src="icon.png" alt="Негропедия">
+                <h1>Негро<span>педия</span></h1>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Поиск по Негропедии..." oninput="searchArticles(event)" onkeydown="searchKeyDown(event)">
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>📚 Статьи</h3>
+            <ul id="articleList"></ul>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="loading">⏳ Загрузка...</div>
+        </main>
+    </div>
+
+    <footer>
+        <p>Негропедия — свободная энциклопедия. Контент доступен по лицензии MIT License</p>
+        <p>© 2026 Негропедия</p>
+    </footer>
+
+    <script>
+        let articlesData = [];
+        let currentArticleId = null;
+
+        // ============ ЗАГРУЗКА STATE.JSON ============
+        async function loadState() {
+            try {
+                const response = await fetch('state.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const data = await response.json();
+                articlesData = Array.isArray(data.articles) ? data.articles : [];
+                renderArticleList();
+            } catch (error) {
+                console.error('Ошибка загрузки state.json:', error);
+                document.getElementById('articleList').innerHTML =
+                    '<li style="color:#d33;font-size:13px;padding:4px 8px;">Ошибка загрузки списка статей</li>';
+                document.getElementById('mainContent').innerHTML =
+                    '<div class="error">❌ Не удалось загрузить state.json<small>' +
+                    escapeHtml(error.message) + '</small></div>';
+            }
+        }
+
+        // ============ РЕНДЕР СПИСКА СТАТЕЙ ============
+        function renderArticleList() {
+            const list = document.getElementById('articleList');
+            list.innerHTML = '';
+
+            // Кнопка "Главная"
+            const homeLi = document.createElement('li');
+            const homeA = document.createElement('a');
+            homeA.textContent = '🏠 Главная';
+            homeA.href = 'javascript:void(0)';
+            homeA.onclick = loadHome;
+            homeLi.appendChild(homeA);
+            list.appendChild(homeLi);
+
+            // Статьи
+            articlesData.forEach(article => {
+                if (!article || !article.id) return;
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.textContent = '📄 ' + (article.title || article.id);
+                a.href = 'javascript:void(0)';
+                a.dataset.id = article.id;
+                a.onclick = () => loadArticle(article.id);
+                li.appendChild(a);
+                list.appendChild(li);
+            });
+
+            updateActiveLink();
+        }
+
+        // ============ ПОДСВЕТКА АКТИВНОЙ СТАТЬИ ============
+        function updateActiveLink() {
+            document.querySelectorAll('.sidebar ul li a').forEach(a => {
+                a.classList.remove('active');
+                if (currentArticleId && a.dataset.id === currentArticleId) {
+                    a.classList.add('active');
+                }
+            });
+        }
+
+        // ============ ЗАГРУЗКА СТАТЬИ ============
+        async function loadArticle(id) {
+            const article = articlesData.find(a => a.id === id);
+            if (!article) {
+                showError('Статья не найдена');
+                return;
+            }
+
+            currentArticleId = id;
+            updateActiveLink();
+
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = '<div class="loading">⏳ Загрузка статьи...</div>';
+
+            try {
+                const response = await fetch('asset/' + article.file, { cache: 'no-store' });
+                if (!response.ok) throw new Error('HTTP ' + response.status + ' — файл ' + article.file);
+                const data = await response.json();
+
+                const title = data.title || article.title || id;
+                const blocks = Array.isArray(data.content) ? data.content :
+                               Array.isArray(data.blocks) ? data.blocks : [];
+
+                let html = '<h1 class="article-title">' + escapeHtml(title) + '</h1>';
+                html += '<div class="article-content">';
+                for (const block of blocks) {
+                    html += renderBlock(block);
+                }
+                html += '</div>';
+
+                mainContent.innerHTML = html;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.error('Ошибка загрузки статьи:', error);
+                showError('Не удалось загрузить статью "' + escapeHtml(article.title) + '"', error.message);
+            }
+        }
+
+        // ============ РЕНДЕР БЛОКА ============
+        function renderBlock(block) {
+            if (!block || typeof block !== 'object') return '';
+
+            const type = block.type || 'paragraph';
+
+            switch (type) {
+                case 'heading': {
+                    const level = Math.min(Math.max(parseInt(block.level, 10) || 2, 1), 6);
+                    return '<h' + level + '>' + formatInline(block.text || '') + '</h' + level + '>';
+                }
+
+                case 'paragraph':
+                case 'text': {
+                    return '<p>' + formatInline(block.text || '') + '</p>';
+                }
+
+                case 'list': {
+                    const tag = block.ordered ? 'ol' : 'ul';
+                    const items = Array.isArray(block.items) ? block.items : [];
+                    let itemsHtml = '';
+                    for (const item of items) {
+                        const text = (typeof item === 'string') ? item : (item && item.text) || '';
+                        itemsHtml += '<li>' + formatInline(text) + '</li>';
+                    }
+                    return '<' + tag + '>' + itemsHtml + '</' + tag + '>';
+                }
+
+                case 'code': {
+                    const lang = block.language ? ' class="language-' + escapeAttr(block.language) + '"' : '';
+                    return '<pre><code' + lang + '>' + escapeHtml(block.code || '') + '</code></pre>';
+                }
+
+                case 'quote':
+                case 'blockquote': {
+                    return '<blockquote>' + formatInline(block.text || '') + '</blockquote>';
+                }
+
+                case 'image': {
+                    const alt = escapeAttr(block.alt || '');
+                    const src = escapeAttr(block.src || '');
+                    if (!src) return '';
+                    const caption = block.caption ? '<figcaption>' + escapeHtml(block.caption) + '</figcaption>' : '';
+                    return '<figure><img src="' + src + '" alt="' + alt + '" loading="lazy">' + caption + '</figure>';
+                }
+
+                case 'table': {
+                    const headers = Array.isArray(block.headers) ? block.headers : [];
+                    const rows = Array.isArray(block.rows) ? block.rows : [];
+                    let tableHtml = '<table>';
+                    if (headers.length) {
+                        tableHtml += '<thead><tr>';
+                        for (const h of headers) {
+                            tableHtml += '<th>' + escapeHtml(h) + '</th>';
+                        }
+                        tableHtml += '</tr></thead>';
+                    }
+                    tableHtml += '<tbody>';
+                    for (const row of rows) {
+                        if (!Array.isArray(row)) continue;
+                        tableHtml += '<tr>';
+                        for (const cell of row) {
+                            tableHtml += '<td>' + formatInline(String(cell)) + '</td>';
+                        }
+                        tableHtml += '</tr>';
+                    }
+                    tableHtml += '</tbody></table>';
+                    return tableHtml;
+                }
+
+                case 'hr':
+                case 'divider': {
+                    return '<hr>';
+                }
+
+                case 'link': {
+                    const href = escapeAttr(block.href || '#');
+                    const text = escapeHtml(block.text || block.href || '');
+                    return '<p><a href="' + href + '" target="_blank" rel="noopener">' + text + '</a></p>';
+                }
+
+                case 'html': {
+                    return block.html || '';
+                }
+
+                default: {
+                    if (block.text) return '<p>' + formatInline(block.text) + '</p>';
+                    return '';
+                }
+            }
+        }
+
+        // ============ ИНЛАЙН-РАЗМЕТКА ============
+        function formatInline(text) {
+            if (text == null) return '';
+            let html = escapeHtml(String(text));
+
+            // Защищаем инлайн-код
+            const codes = [];
+            html = html.replace(/`([^`]+)`/g, function (m, code) {
+                const i = codes.length;
+                codes.push('<code>' + code + '</code>');
+                return '\x00C' + i + '\x00';
+            });
+
+            // Жирный + курсив
+            html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+            html = html.replace(/___(.+?)___/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+            html = html.replace(/_(.+?)_/g, '<em>$1</em>');
+
+            // Зачёркнутый
+            html = html.replace(/~~(.+?)~~/g, '<del>$1</del>');
+
+            // Ссылки
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (m, txt, url) {
+                return '<a href="' + escapeAttr(url) + '" target="_blank" rel="noopener">' + txt + '</a>';
+            });
+
+            // Восстанавливаем код
+            html = html.replace(/\x00C(\d+)\x00/g, function (m, i) { return codes[i]; });
+
+            return html;
+        }
+
+        // ============ ЭКРАНИРОВАНИЕ ============
+        function escapeHtml(text) {
+            return String(text == null ? '' : text)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function escapeAttr(text) {
+            return String(text == null ? '' : text)
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        // ============ ОШИБКА ============
+        function showError(message, details) {
+            const detailHtml = details ? '<small>' + escapeHtml(details) + '</small>' : '';
+            document.getElementById('mainContent').innerHTML =
+                '<div class="error">❌ ' + escapeHtml(message) + detailHtml + '</div>';
+        }
+
+        // ============ ГЛАВНАЯ ============
+        function loadHome() {
+            currentArticleId = null;
+            updateActiveLink();
+            document.getElementById('mainContent').innerHTML =
+                '<div class="welcome">' +
+                    '<h2>Добро пожаловать в Негропедию</h2>' +
+                    '<p>Свободную энциклопедию, которую может редактировать каждый</p>' +
+                    '<p>Выберите статью из списка слева или воспользуйтесь поиском</p>' +
+                    '<div class="stats">' +
+                        '<div class="stat">' +
+                            '<div class="number">' + articlesData.length + '</div>' +
+                            '<div class="label">статей</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============ ПОИСК ============
+        function searchArticles(event) {
+            const query = (event.target.value || '').toLowerCase().trim();
+            const links = document.querySelectorAll('.sidebar ul li a');
+
+            links.forEach(link => {
+                const li = link.parentElement;
+                // Пропускаем кнопку "Главная"
+                if (!link.dataset.id) {
+                    li.style.display = '';
+                    return;
+                }
+                const text = link.textContent.toLowerCase();
+                li.style.display = (query === '' || text.indexOf(query) !== -1) ? '' : 'none';
+            });
+        }
+
+        function searchKeyDown(event) {
+            if (event.key !== 'Enter') return;
+            const links = document.querySelectorAll('.sidebar ul li a');
+            for (const link of links) {
+                if (!link.dataset.id) continue;
+                if (link.parentElement.style.display !== 'none') {
+                    link.click();
+                    return;
+                }
+            }
+        }
+
+        // ============ СТАРТ ============
+        loadState();
+    </script>
+</body>
+</html>
