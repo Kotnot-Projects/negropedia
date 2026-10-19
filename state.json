@@ -4,6 +4,11 @@
       "id": "battle_nemensk",
       "title": "Битва за Неменск",
       "file": "nemensk.json"
+    },
+    {
+  "id": "kotnot-velikij",
+  "title": "Котнот Великий",
+  "file": "kotnot-velikij.json"
     }
   ]
 }
